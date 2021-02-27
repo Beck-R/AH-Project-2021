@@ -1,6 +1,7 @@
 import platform
 import psutil
 import requests
+import json
 
 #Send data to flask server using requests module
 def convert_bytes(bytes):
@@ -26,36 +27,99 @@ processor = system.processor
 #CPU Information
 
 phys_cores = psutil.cpu_count(logical=False)
-Total_cores = psutil.cpu_count(logical=True)
+total_cores = psutil.cpu_count(logical=True)
 
 frequency = psutil.cpu_freq()
 min_freq = frequency.min
 max_freq = frequency.max
-curr_freq = frequency.current
+cur_freq = frequency.current
 
-total_cpu_usage = psutil.cpu_percent()
+cpu_usage = psutil.cpu_percent()
 
 #memory usage
 
 memory = psutil.virtual_memory()
 
-total_mem = convert_bytes(memory.total)
-available_mem = convert_bytes(memory.available)
-used_mem = convert_bytes(memory.used)
-percentage_mem = (str(memory.percent) + '%')
+mem_total = convert_bytes(memory.total)
+mem_avail = convert_bytes(memory.available)
+mem_usage = convert_bytes(memory.used)
+mem_percent = (str(memory.percent) + '%')
 
 
 #disk Information
 
 parts = psutil.disk_partitions()
 
-dict_parts = {}
-
 for partition in parts:
-    partition_usage = psutil.disk_usage(partition.mountpoint)
-    dict_parts[partition.device] = [partition.mountpoint, partition.fstype, convert_bytes(partition_usage.total), convert_bytes(partition_usage.used), convert_bytes(partition_usage.free), partition_usage.percent]
-    # {partiton name: [mountpoint, type, total memory, used memory, free memory, percentage used]}
+    device = partition.device
+    mp = partition.mountpoint
+    fstype = partition.fstype
+
+    try:
+        partition_usage = psutil.disk_usage(partition.mountpoint)
+    except PermissionError:
+        continue
+    
+    total_size = convert_bytes(partition_usage.total)
+    disk_usage = convert_bytes(partition_usage.used)
+    disk_free = convert_bytes(partition_usage.free)
+    disk_percent = partition_usage.percent
+
+    # get total read & writes since last boot
+    disk_io = psutil.disk_io_counters()
+    
+    read = convert_bytes(disk_io.read_bytes)
+    write = convert_bytes(disk_io.write_bytes)
 
 
-send_data = {'computers': [ {'os': operating_system, 'osRelease': release, 'processor': processor, 'cores': phys_cores, 'baseGHz': (max_freq/1024), 'currentGHz': (curr_freq/1024), 'memoryAvailable': available_mem, "memoryUsed": used_mem, 'disks': []}]}
 
+
+send_data = {
+    "computer" : [
+        {
+            "os" : operating_system,
+            "os_release" : release,
+            "os_version" : version,
+            "sys_name" : node,
+            "machine" : machine,
+
+            "cpu" : [
+                {
+                    "processor" : processor,
+                    "phys_cores" : phys_cores,
+                    "total_cores" : total_cores,
+                    "min_freq" : min_freq,
+                    "max_freq" : max_freq,
+                    "cur_freq" : cur_freq,
+                    "cpu_usage" : cpu_usage
+                }
+            ],
+
+            "memory" : [
+                {
+                    "total_mem" : mem_total,
+                    "avail_mem" : mem_avail,
+                    "mem_usage" : mem_usage,
+                    "percent_mem" : mem_percent
+                }
+            ],
+
+            "disk" : [
+                {
+                    "device" : device,
+                    "mountpoint" : mp,
+                    "fstype" : fstype,
+                    "total_size" : total_size,
+                    "disk_usage" : disk_usage,
+                    "disk_free" : disk_free,
+                    "disk_percent" : disk_percent,
+                    "total_read" : read,
+                    "total_write" : write
+
+                }
+            ]
+        }
+    ]
+}
+
+requests.post("", json = send_data)
