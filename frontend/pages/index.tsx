@@ -4,11 +4,11 @@ import { GetServerSideProps } from 'next'
 
 import 'isomorphic-unfetch';
 
-interface theProps {
-  computers: Computer[],
+interface IProps {
+  computers: IComputer[],
 }
 
-type Computer = {
+interface IComputer {
 
   "os": String,
   "os_release": String,
@@ -54,7 +54,7 @@ type Computer = {
 }
 
 
-export default function Home(props: theProps) {
+export default function Home(props: IProps) {
   const { computers } = props
   return (
     <div>
