@@ -57,9 +57,24 @@ interface IComputer {
 export default function Home(props: IProps) {
   const { computers } = props
   return (
+    // include stats of how many computers are active, average memory usage, average cpu usage on top
     <div>
-
+      {computers.map((machine) => (<CompCard computer={machine} />))}
     </div>
+  )
+}
+
+
+interface ICompCard {
+  computer: IComputer
+}
+
+// make this render a card with name, current processor freq and memory usage
+// for now it'll just show the machine name
+function CompCard(props: ICompCard) {
+  const { computer } = props
+  return (
+    <p>{computer.sys_name}</p>
   )
 }
 
