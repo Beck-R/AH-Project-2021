@@ -1,6 +1,6 @@
 import platform
 import psutil
-
+import requests
 
 #Send data to flask server using requests module
 def convert_bytes(bytes):
@@ -53,5 +53,9 @@ dict_parts = {}
 
 for partition in parts:
     partition_usage = psutil.disk_usage(partition.mountpoint)
-    dict_parts[partition.device] = [partition.mountpoint, partition.fstype, convert_bytes(partition_usage.total), convert_bytes(partition_usage.used), convert_bytes(partition_usage.free), convert_bytes(partition_usage.percent)]
+    dict_parts[partition.device] = [partition.mountpoint, partition.fstype, convert_bytes(partition_usage.total), convert_bytes(partition_usage.used), convert_bytes(partition_usage.free), partition_usage.percent]
     # {partiton name: [mountpoint, type, total memory, used memory, free memory, percentage used]}
+
+
+send_data = {'computers': [ {'os': operating_system, 'osRelease': release, 'processor': processor, 'cores': phys_cores, 'baseGHz': (max_freq/1024), 'currentGHz': (curr_freq/1024), 'memoryAvailable': available_mem, "memoryUsed": used_mem, 'disks': []}]}
+
