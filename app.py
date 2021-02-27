@@ -24,6 +24,14 @@ def send_data(id):
     except Exception as e:
         return formatErr(e)
 
+@app.route('/api/computers/all/sendData',  methods=['GET'])
+def send_all_data():
+    try:
+        data = dictData
+        return jsonify(data)
+    except Exception as e:
+        return formatErr(e)
+
 def formatErr(e): 
     return f"Error: \n\n {e}"
 
