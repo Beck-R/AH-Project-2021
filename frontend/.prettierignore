@@ -1,0 +1,13 @@
+.github/*
+
+node_modules/
+.next/
+.vercel/
+public/
+
+.gitignore
+.eslintrc
+yarn.lock
+.prettierignore
+.env.local
+LICENSE
