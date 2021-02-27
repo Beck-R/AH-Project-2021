@@ -122,4 +122,4 @@ send_data = {
     ]
 }
 
-requests.post("", json = send_data)
+requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(send_data))
