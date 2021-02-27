@@ -113,6 +113,27 @@ start_data = {
 requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(start_data))
 
 while True:
+    frequency = psutil.cpu_freq()
+    cur_freq = frequency.current
+    cpu_usage = psutil.cpu_percent()
+    mem_avail = convert_bytes(memory.available)
+    mem_usage = convert_bytes(memory.used)
+    mem_percent = (str(memory.percent) + '%')
+    disk_io = psutil.disk_io_counters()
+    parts = psutil.disk_partitions()
+
+    for partition in parts:
+        try:
+            partition_usage = psutil.disk_usage(partition.mountpoint)
+        except PermissionError:
+            continue
+            
+        disk_usage = convert_bytes(partition_usage.used)
+        disk_free = convert_bytes(partition_usage.free)
+        disk_percent = partition_usage.percent
+    
+    read = convert_bytes(disk_io.read_bytes)
+    write = convert_bytes(disk_io.write_bytes)
     realtime_data = {
         "version": "realtime",
                 "computer" : [
