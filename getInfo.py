@@ -117,14 +117,14 @@ while True:
         "version": "realtime",
                 "computer" : [
             {
-                "r_cpu" : [
+                "cpu" : [
                     {
                         "cur_freq" : cur_freq,
                         "cpu_usage" : cpu_usage
                     }
                 ],
 
-                "r_memory" : [
+                "memory" : [
                     {
                         "avail_mem" : mem_avail,
                         "mem_usage" : mem_usage,
@@ -132,7 +132,7 @@ while True:
                     }
                 ],
 
-                "r_disk" : [
+                "disk" : [
                     {
                         "disk_usage" : disk_usage,
                         "disk_free" : disk_free,
