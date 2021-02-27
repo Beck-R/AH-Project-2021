@@ -1,3 +1,4 @@
+import time
 import platform
 import psutil
 import requests
@@ -73,8 +74,7 @@ for partition in parts:
 
 
 
-
-send_data = {
+start_data = {
     "computer" : [
         {
             "os" : operating_system,
@@ -90,17 +90,12 @@ send_data = {
                     "total_cores" : total_cores,
                     "min_freq" : min_freq,
                     "max_freq" : max_freq,
-                    "cur_freq" : cur_freq,
-                    "cpu_usage" : cpu_usage
                 }
             ],
 
             "memory" : [
                 {
                     "total_mem" : mem_total,
-                    "avail_mem" : mem_avail,
-                    "mem_usage" : mem_usage,
-                    "percent_mem" : mem_percent
                 }
             ],
 
@@ -110,16 +105,45 @@ send_data = {
                     "mountpoint" : mp,
                     "fstype" : fstype,
                     "total_size" : total_size,
-                    "disk_usage" : disk_usage,
-                    "disk_free" : disk_free,
-                    "disk_percent" : disk_percent,
-                    "total_read" : read,
-                    "total_write" : write
-
                 }
             ]
         }
     ]
 }
+requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(start_data))
 
-requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(send_data))
+while True:
+    realtime_data = {
+                "computer" : [
+            {
+                "r_cpu" : [
+                    {
+                        "cur_freq" : cur_freq,
+                        "cpu_usage" : cpu_usage
+                    }
+                ],
+
+                "r_memory" : [
+                    {
+                        "avail_mem" : mem_avail,
+                        "mem_usage" : mem_usage,
+                        "percent_mem" : mem_percent
+                    }
+                ],
+
+                "r_disk" : [
+                    {
+                        "disk_usage" : disk_usage,
+                        "disk_free" : disk_free,
+                        "disk_percent" : disk_percent,
+                        "total_read" : read,
+                        "total_write" : write
+
+                    }
+                ]
+            }
+        ]
+    }
+    requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(realtime_data))
+
+    time.sleep(10)
