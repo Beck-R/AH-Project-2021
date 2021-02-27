@@ -114,6 +114,7 @@ requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = jso
 
 while True:
     realtime_data = {
+        "version": "realtime",
                 "computer" : [
             {
                 "r_cpu" : [
