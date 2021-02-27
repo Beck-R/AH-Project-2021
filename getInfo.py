@@ -2,7 +2,7 @@ import platform
 import psutil
 
 
-#Send data to flas server using requests module
+#Send data to flask server using requests module
 def convert_bytes(bytes):
     factor = 1024
     listValues = ['B', 'KB', 'MB', 'GB', "TB", 'PB']
