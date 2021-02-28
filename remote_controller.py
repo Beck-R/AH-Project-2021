@@ -361,10 +361,6 @@ def automation():
                     pgi.press('\ '.replace(' ', ''))
                 elif x == "'|'":
                     pgi.press('|')
-                '''elif x == "'"'":
-                    pgi.press('"')
-                elif x == "`'`":
-                    pgi.press("'")'''
 
         clicks = requests.get(f'http://192.168.1.100:8080/api/computers/{pc}/getClicks').json()
         listClicks = clicks['clicks']
