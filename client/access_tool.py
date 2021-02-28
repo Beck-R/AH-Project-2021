@@ -22,7 +22,7 @@ def send_data():
             x, y = pgi.position()
             x = int(x * float(WIDTH/SC_WIDTH))
             y = int(y * float(HEIGHT/SC_HEIGHT))
-            requests.post(f'http://192.168.1.100:8080/api/computers/{data}/sendCoordinates', json={'x': x, 'y': y})
+            requests.post(f'http://openaccess.space:8080/api/computers/{data}/sendCoordinates', json={'x': x, 'y': y})
             print('successfu post m')
             #time.sleep(0.2)
         except:
@@ -31,7 +31,7 @@ def send_data():
 def send_keyboard():
     global data
     def on_press(key):
-        requests.post(f'http://192.168.1.100:8080/api/computers/{data}/sendKeys', json={'key': str(key)})
+        requests.post(f'http://openaccess.space:8080/api/computers/{data}/sendKeys', json={'key': str(key)})
     with pynput.keyboard.Listener(on_press=on_press) as listener:
         listener.join()
 
@@ -44,7 +44,7 @@ def send_clicks():
             buttonA = 'left'
         if str(button) == 'Button.right':
             buttonA = 'right'
-        requests.post(f'http://192.168.1.100:8080/api/computers/{data}/sendClicks', json={'button':buttonA, 'state':str(pressed)})
+        requests.post(f'http://openaccess.space:8080/api/computers/{data}/sendClicks', json={'button':buttonA, 'state':str(pressed)})
     with pynput.mouse.Listener(on_click=on_click) as listener:
         listener.join()
 
@@ -130,14 +130,14 @@ if __name__ == '__main__':
         for x in range(len(data)):
             if ' SSID' in data[x]:
                 ssid = data[x].replace(' ', '').replace('SSID:', '')
-    r = requests.get('http://192.168.1.100:8080/api/computers/{ssid}/listOfConnectedDevices').json()
+    r = requests.get('http://openaccess.space:8080/api/computers/{ssid}/listOfConnectedDevices').json()
     lDevices = r['list']
     dDevices = {}
     for i in range(len(lDevices)):
         dDevices[i] = lDevices[i]
         print(i, lDevices[i])
     choice = int(input('Please Enter No. corresponding to the device you want to control: '))
-    d = requests.get(f'http://192.168.1.100:8080/api/computers/{lDevices[choice]}/getIpPort').json()
+    d = requests.get(f'http://openaccess.space:8080/api/computers/{lDevices[choice]}/getIpPort').json()
     print(d)
     main(host=d['ip'], port=int(d['port']))
     
