@@ -1,4 +1,5 @@
 import { IComputer } from '../interfaces/IComputer'
+import { Card } from 'antd';
 
 export interface ICompCard {
     computer: IComputer
@@ -10,6 +11,11 @@ export interface ICompCard {
 export function CompCard(props: ICompCard) {
     const { computer } = props
     return (
-        <p>{computer.init.sys_name}</p>
+        <Card style={{ width: 300 }} title={computer.init.sys_name} extra={<a href={"/machines/"+computer.init.sys_name}>More</a>}>
+        <p><b>System Vitals</b></p>
+        <p>OS: {computer.init.os} {computer.init.os_release}</p>
+        <p>Memory: {computer.computer.memory.percent_mem} out of {computer.init.memory.total_mem}</p>
+        <p>Processor: {computer.computer.cpu.cur_freq} out of {computer.init.cpu.max_freq} ({computer.computer.cpu.cpu_usage}%)</p>
+        </Card>
     )
 }

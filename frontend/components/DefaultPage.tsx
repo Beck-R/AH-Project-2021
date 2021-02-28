@@ -1,15 +1,19 @@
-import { IMenuProps, SideMenu } from './SideMenu'
-import {Row, Col} from 'antd'
+import {IMenuProps, SideMenu} from "./SideMenu"
+import {Row, Col} from "antd"
 
+const menuWidth = 4
+const contentWidth = 24 - menuWidth
 
-export function DefaultPage(props: any) {
+export function DefaultPage(props: any): JSX.Element {
     return (
         <Row>
-            <Col span="4">
-            <SideMenu />
+            <Col span={menuWidth}>
+                <SideMenu />
             </Col>
-            <Col span="20">
-            {props && props.children ? props.children : <></>}
+            <Col span={contentWidth}>
+                <div style={{margin: "none", padding: "1em"}}>
+                    {props && props.children ? props.children : <></>}
+                </div>
             </Col>
         </Row>
     )

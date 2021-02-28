@@ -20,7 +20,7 @@ export function SideMenu(props: IMenuProps): JSX.Element {
             <div
                 style={{
                     width: "100%",
-                    backgroundColor: "#1d39c4",
+                    backgroundColor: "#001529",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -31,7 +31,6 @@ export function SideMenu(props: IMenuProps): JSX.Element {
                     
                 }}>
                 <RadarChartOutlined style={{fontSize: "2em"}}/>
-                <Text type="secondary">Remotus</Text> 
             </div>
             <Menu theme="dark" style={{position: "sticky", height: "100vh"}}>
                 <Menu.Item key="1" icon={<ContainerOutlined />}>
