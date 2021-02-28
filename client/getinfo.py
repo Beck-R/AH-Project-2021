@@ -89,7 +89,7 @@ def sys_monitor():
             }
         
     }
-    base_url = "http://localhost:8080"
+    base_url = "http://openaccess.space:8080"
     data_url = f"{base_url}/api/computers/{node}/getData"
 
     requests.post(data_url, json = json.dumps(start_data))
