@@ -56,7 +56,7 @@ def sys_monitor():
     # onetime data
     start_data = {
         "version": "start",
-        "computer" : 
+        "init" : 
             {
                 "os" : operating_system,
                 "os_release" : release,
