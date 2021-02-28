@@ -56,6 +56,7 @@ mem_total = convert_bytes(memory.total)
 start_data = {
     "computer" : [
         {
+            "version": "start",
             "os" : operating_system,
             "os_release" : release,
             "os_version" : version,
@@ -80,7 +81,11 @@ start_data = {
         }
     ]
 }
-data_url = f"http://localhost:3000/api/computers/{node}/getData"
+base_url = "http://localhost:8080"
+data_url = f"{base_url}/api/computers/{node}/getData"
+print("START")
+print(json.dumps(start_data))
+print("START\n\n")
 requests.post(data_url, json = json.dumps(start_data))
 
 # realtime data
@@ -118,11 +123,14 @@ while True:
         read = convert_bytes(disk_io.read_bytes)
         write = convert_bytes(disk_io.write_bytes)
 
-        list_disks.append((
-            device, mp, fstype, total_size,
-            disk_usage, disk_free, disk_percent,
-            read, write
-        ))
+        list_disks.append({
+            "device":device, "mp":mp, "fstype": fstype, "total_size": total_size,
+            "disk_usage": disk_usage, "disk_free": disk_free, "disk_percent": disk_percent,
+            "read": read, "write": write
+        })
+
+
+    disk_data = {"version": "disks", "disks": list_disks}
 
     # realtime gpu
     gpus = GPUtil.getGPUs()
@@ -138,36 +146,39 @@ while True:
         gpu_temp = "f{gpu.temperature}℃"
         gpu_uuid = gpu.uuid
 
-        list_gpu.append((
-            gpu_id, gpu_name, gpu_load,
-            gpu_free_mem, gpu_used_mem, gpu_total_mem,
-            gpu_temp, gpu_uuid
-        ))
-    
+        list_gpu.append({
+            "gpu_id": gpu_id, "gpu_name": gpu_name, "gpu_load": gpu_load,
+            "gpu_free_mem": gpu_free_mem, "gpu_used_mem": gpu_used_mem, "gpu_total_mem": gpu_total_mem,
+            "gpu_temp": gpu_temp, "gpu_uuid": gpu_uuid
+        })
 
+    gpu_data = {"version": "gpu", "gpus": list_gpu}
+    
     # realtime json
     realtime_data = {
         "version": "realtime",
-                "computer" : [
+                "computer" : 
             {
-                "cpu" : [
+                "cpu" : 
                     {
                         "cur_freq" : cur_freq,
                         "cpu_usage" : cpu_usage
-                    }
-                ],
+                    },
 
-                "memory" : [
+                "memory" : 
                     {
                         "avail_mem" : mem_avail,
                         "mem_usage" : mem_usage,
                         "percent_mem" : mem_percent
                     }
-                ]
+                
             }
-        ]
+        
     }
-    requests.post(data_url, json = json.dumps(realtime_data))
-    requests.post(data_url, json = json.dumps(list_disks))
-    requests.post(data_url, json = json.dumps(list_gpu))
+    print("\n\n\n", requests.post(data_url, json = json.dumps(realtime_data)).text, "\n")
+    print(requests.post(data_url, json = json.dumps(disk_data)).text, "\n")
+    print(requests.post(data_url, json = json.dumps(gpu_data)).text)
+    # requests.post(data_url, json = json.dumps(realtime_data))
+    # requests.post(data_url, json = json.dumps(disk_data))
+    # requests.post(data_url, json = json.dumps(gpu_data))
     time.sleep(5)
