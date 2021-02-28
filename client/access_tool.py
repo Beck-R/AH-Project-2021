@@ -5,7 +5,7 @@ import pygame, time
 import requests
 import threading
 #from pynput.mouse import Listener
-import pynput, sys
+import pynput, sys, subprocess
 
 data = ''
 WIDTH = 1920
