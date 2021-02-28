@@ -3,7 +3,7 @@ from threading import Thread
 from zlib import compress
 import platform
 from mss import mss
-import get_controls as name
+import getcontrols as name
 import time, random, requests
 import subprocess
 
