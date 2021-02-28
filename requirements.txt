@@ -1,0 +1,4 @@
+GPUtil==1.4.0
+flask==1.1.2
+psutil==5.8.0
+requests==2.25.1
