@@ -1,7 +1,7 @@
 from getinfo import sys_monitor
 from getprocess import proc_monitor
 from server import main
-import requests
+import requests, sockets
 
 host = socket.gethostbyname(socket.gethostname())
 port = random.randint(10000, 10100)
