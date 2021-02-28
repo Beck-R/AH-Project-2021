@@ -54,32 +54,30 @@ mem_total = convert_bytes(memory.total)
 
 # onetime data
 start_data = {
-    "computer" : [
+    "version": "start",
+    "computer" : 
         {
-            "version": "start",
             "os" : operating_system,
             "os_release" : release,
             "os_version" : version,
             "sys_name" : node,
             "machine" : machine,
 
-            "cpu" : [
+            "cpu" : 
                 {
                     "processor" : processor,
                     "phys_cores" : phys_cores,
                     "total_cores" : total_cores,
                     "min_freq" : min_freq,
                     "max_freq" : max_freq,
-                }
-            ],
+                },
 
-            "memory" : [
+            "memory" : 
                 {
                     "total_mem" : mem_total,
                 }
-            ]
         }
-    ]
+    
 }
 base_url = "http://localhost:8080"
 data_url = f"{base_url}/api/computers/{node}/getData"
