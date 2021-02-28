@@ -14,6 +14,15 @@ def convert_bytes(bytes):
             return (str(bytes) + ' ' + unit)
         bytes = bytes/factor
 
+def gpu_bytes(bytes):
+    factor = 1000
+    listValues = ["MB", "GB", "TB", "PB"]
+    for unit in listValues:
+        if bytes < factor:
+            return (str(bytes) + ' ' + unit)
+        bytes = bytes/factor
+
+
 def scale_freq(freq):
     factor = 1000
     listValues = ["Mhz", "Ghz", "Thz"]
@@ -137,10 +146,10 @@ def sys_monitor():
             gpu_id = gpu.id
             gpu_name = gpu.name
             gpu_load = gpu.load*100
-            gpu_free_mem = convert_bytes(gpu.memoryFree)
-            gpu_used_mem = convert_bytes(gpu.memoryUsed)
-            gpu_total_mem = convert_bytes(gpu.memoryTotal)
-            gpu_temp = "f{gpu.temperature}℃"
+            gpu_free_mem = gpu_bytes(gpu.memoryFree)
+            gpu_used_mem = gpu_bytes(gpu.memoryUsed)
+            gpu_total_mem = gpu_bytes(gpu.memoryTotal)
+            gpu_temp = str(gpu.temperature) + "℃"
             gpu_uuid = gpu.uuid
 
             list_gpu.append({
@@ -172,7 +181,6 @@ def sys_monitor():
                 }
             
         }
-
         requests.post(data_url, json = json.dumps(realtime_data))
         requests.post(data_url, json = json.dumps(disk_data))
         requests.post(data_url, json = json.dumps(gpu_data))
