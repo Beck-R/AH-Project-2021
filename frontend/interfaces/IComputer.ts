@@ -46,7 +46,7 @@ export interface IComputer {
 
     computer: {
         cpu: {
-            cur_freq: number
+            cur_freq: string
             cpu_usage: number
         }
         memory: {

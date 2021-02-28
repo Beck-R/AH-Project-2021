@@ -7,6 +7,7 @@ import {
     DesktopOutlined,
     ContainerOutlined,
     MailOutlined,
+    QuestionOutlined,
     RadarChartOutlined
 } from "@ant-design/icons"
 
@@ -35,6 +36,9 @@ export function SideMenu(props: IMenuProps): JSX.Element {
             <Menu theme="dark" style={{position: "sticky", height: "100vh"}}>
                 <Menu.Item key="1" icon={<ContainerOutlined />}>
                     Home
+                </Menu.Item>
+                <Menu.Item key="1" icon={<QuestionOutlined />}>
+                    About
                 </Menu.Item>
             </Menu>
         </>

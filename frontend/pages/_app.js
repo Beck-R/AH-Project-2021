@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Remote Monitoring</title>
+        <title>Open Access Tool</title>
       </Head>
 
         <Component {...pageProps} />
