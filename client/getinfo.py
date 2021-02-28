@@ -185,3 +185,5 @@ def sys_monitor():
         requests.post(data_url, json = json.dumps(disk_data))
         requests.post(data_url, json = json.dumps(gpu_data))
         time.sleep(5)
+
+sys_monitor()
