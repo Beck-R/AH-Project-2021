@@ -1,0 +1,1 @@
+Make sure you have Node.js and Yarn installed, then run `yarn` and `yarn run dev`.
