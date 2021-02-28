@@ -3,7 +3,7 @@ from threading import Thread
 from zlib import compress
 import platform
 from mss import mss
-import remote_controller
+import get_control as name
 import time, random, requests
 import subprocess
 
