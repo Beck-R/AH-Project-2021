@@ -1,12 +1,6 @@
 export interface IComputer {
-
-    "os": string,
-    "os_release": string,
-    "os_version": string,
-    "sys_name": string,
-    "machine": string,
   
-    "cpu": [
+    "start": [
       {
         "processor": string,
         "phys_cores": Number,

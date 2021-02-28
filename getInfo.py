@@ -55,7 +55,7 @@ mem_total = convert_bytes(memory.total)
 # onetime data
 start_data = {
     "version": "start",
-    "computer" : 
+    "init" : 
         {
             "os" : operating_system,
             "os_release" : release,
