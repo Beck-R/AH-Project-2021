@@ -1,6 +1,6 @@
 import {IComputer} from "../interfaces/IComputer"
 
-const mockComputers: IComputer[] = [
+export const mockComputers: IComputer[] = [
     {
         os: "Win10",
         os_release: "2020",
@@ -339,4 +339,4 @@ const mockComputers: IComputer[] = [
     }
 ]
 
-export default mockComputers
+

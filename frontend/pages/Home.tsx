@@ -4,7 +4,7 @@ import {GetServerSideProps} from "next"
 
 import {IComputer} from "../interfaces/IComputer"
 
-import mockComputers from "../mock_data/Computer"
+import {mockComputers} from "../mock_data/Computer"
 import {ICompCard, CompCard} from "../components/CompCard"
 import {IMenuProps, Menu} from "../components/Menu"
 
@@ -33,10 +33,12 @@ export default function Home(props: IHomeProps) {
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export function getServerSideProps() {
     // const computers: any = await fetcher("/api/computers/all/sendData")
 
     // this is for development until i have the backend running
     const computers: IComputer[] = mockComputers
+    console.log("********", computers)
+    console.log("********", mockComputers)
     return {props: {computers}}
 }
