@@ -57,7 +57,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const computers: any = await fetcher(
         `http://localhost:8080/api/computers/all/sendData`
-    )
+    ) || {}
     console.log(typeof computers)
     var machines = []
     var avgProcUsage = 0

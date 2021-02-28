@@ -1,1 +1,1 @@
-yarn --cwd "./frontend" && yarn --cwd "./frontend" run build && yarn --cwd "./frontend" run next start
+yarn --cwd "./frontend" && yarn --cwd "./frontend" run dev
