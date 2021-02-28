@@ -83,9 +83,7 @@ start_data = {
 }
 base_url = "http://localhost:8080"
 data_url = f"{base_url}/api/computers/{node}/getData"
-print("START")
-print(json.dumps(start_data))
-print("START\n\n")
+
 requests.post(data_url, json = json.dumps(start_data))
 
 # realtime data
@@ -175,10 +173,8 @@ while True:
             }
         
     }
-    print("\n\n\n", requests.post(data_url, json = json.dumps(realtime_data)).text, "\n")
-    print(requests.post(data_url, json = json.dumps(disk_data)).text, "\n")
-    print(requests.post(data_url, json = json.dumps(gpu_data)).text)
-    # requests.post(data_url, json = json.dumps(realtime_data))
-    # requests.post(data_url, json = json.dumps(disk_data))
-    # requests.post(data_url, json = json.dumps(gpu_data))
+
+    requests.post(data_url, json = json.dumps(realtime_data))
+    requests.post(data_url, json = json.dumps(disk_data))
+    requests.post(data_url, json = json.dumps(gpu_data))
     time.sleep(5)
