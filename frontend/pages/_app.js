@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import 'antd/dist/antd.min.css';
 
 function MyApp({ Component, pageProps }) {
   return (

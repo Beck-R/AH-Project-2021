@@ -1,11 +1,16 @@
-import { IMenuProps, Menu } from '../components/Menu'
+import { IMenuProps, SideMenu } from './SideMenu'
+import {Row, Col} from 'antd'
 
 
 export function DefaultPage(props: any) {
     return (
-        <div>
-            <Menu />
+        <Row>
+            <Col span="4">
+            <SideMenu />
+            </Col>
+            <Col span="20">
             {props && props.children ? props.children : <></>}
-        </div>
+            </Col>
+        </Row>
     )
 }

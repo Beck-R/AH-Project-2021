@@ -3,7 +3,6 @@ import {GetServerSideProps} from "next"
 
 import {IComputer} from "../interfaces/IComputer"
 
-import {mockComputers} from "../mock_data/Computer"
 import {ICompCard, CompCard} from "../components/CompCard"
 
 import {DefaultPage} from "../components/DefaultPage"
@@ -22,7 +21,7 @@ export default function Home(props: IHomeProps) {
         // include stats of how many computers are active, average memory usage, average cpu usage on top
         <DefaultPage>
             {computers.map((machine) => (
-                <CompCard key={machine.machine} computer={machine} />
+                <CompCard key={machine.init.sys_name} computer={machine} />
             ))}
         </DefaultPage>
     )
@@ -38,9 +37,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     for (const machine in computers) {
         machines.push(computers[machine])
     }
-
-    // this is for development until i have the backend running
-    // const computers: IComputer[] = mockComputers
 
     console.log("********", computers)
     return {

@@ -10,6 +10,6 @@ export interface ICompCard {
 export function CompCard(props: ICompCard) {
     const { computer } = props
     return (
-        <p>{computer.sys_name}</p>
+        <p>{computer.init.sys_name}</p>
     )
 }
