@@ -10,13 +10,13 @@ def automation():
     global pc
     global play
     while play:
-        data = requests.get(f'http://192.168.1.100:8080/api/computers/{pc}/getCoordinates').json()
+        data = requests.get(f'http://openaccess.space:8080/api/computers/{pc}/getCoordinates').json()
         #print(data)
         x = data['x']
         y = data['y']
         pgi.moveTo(x, y)
         #print('x',x, 'y', y)
-        keys = requests.get(f'http://192.168.1.100:8080/api/computers/{pc}/getKeys').json()
+        keys = requests.get(f'http://openaccess.space:8080/api/computers/{pc}/getKeys').json()
         listKeys = keys['keys']
         for x in listKeys:
             if x != '':
@@ -366,7 +366,7 @@ def automation():
                 elif x == "`'`":
                     pgi.press("'")'''
 
-        clicks = requests.get(f'http://192.168.1.100:8080/api/computers/{pc}/getClicks').json()
+        clicks = requests.get(f'http://openaccess.space:8080/api/computers/{pc}/getClicks').json()
         listClicks = clicks['clicks']
         for x in listClicks:
             #print('x',x)
