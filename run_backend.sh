@@ -1,0 +1,1 @@
+pip3 install -r requirements.txt && python3 app.py && cd frontend && yarn --cwd "./frontend" && yarn --cwd "./frontend" run next start
