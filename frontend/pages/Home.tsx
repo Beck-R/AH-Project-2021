@@ -34,7 +34,7 @@ export default function Home(props: IHomeProps) {
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    // const computers: any = await fetcher("https://jasonaa.me/some/url/for/all/machines")
+    // const computers: any = await fetcher("/api/computers/all/sendData")
 
     // this is for development until i have the backend running
     const computers: IComputer[] = mockComputers
