@@ -1,38 +1,58 @@
 export interface IComputer {
-  
-    "start": [
-      {
-        "processor": string,
-        "phys_cores": Number,
-        "total_cores": Number,
-        "min_freq": Number,
-        "max_freq": Number,
-        "cur_freq": Number,
-        "cpu_usage": Number
-      }
-    ],
-  
-    "memory": [
-      {
-        "total_mem": Number,
-        "avail_mem": Number,
-        "mem_usage": Number,
-        "percent_mem": Number
-      }
-    ],
-  
-    "disk": [
-      {
-        "device": string,
-        "mountpoint": string,
-        "fstype": string,
-        "total_size": Number,
-        "disk_usage": Number,
-        "disk_free": Number,
-        "disk_percent": Number,
-        "total_read": Number,
-        "total_write": Number
-  
-      }
+    init: {
+        os: string
+        os_release: string
+        os_version: string
+        sys_name: string
+        machine: string
+        cpu: {
+            processor: string
+            phys_cores: string
+            total_cores: string
+            min_freq: string
+            max_freq: string
+        }
+        memory: {
+            total_mem: string
+        }
+    }
+
+    disks: [
+        {
+            device: string
+            mp: string
+            fstype: string
+            total_size: number
+            disk_usage: number
+            disk_free: number
+            disk_percent: number
+            read: number
+            write: number
+        }
     ]
-  }
+
+    gpus: [
+        {
+            gpu_id: number
+            gpu_name: string
+            gpu_load: number
+            gpu_free_mem: string
+            gpu_used_mem: string
+            gpu_total_mem: string
+            gpu_temp: string
+            gpu_uuid: string
+        }
+    ]
+
+    computer: {
+        cpu: {
+            cur_freq: number
+            cpu_usage: number
+        }
+        memory: {
+            avail_mem: string
+            mem_usage: string
+            percent_mem: string
+        }
+    }
+}
