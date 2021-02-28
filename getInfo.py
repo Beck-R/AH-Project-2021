@@ -5,7 +5,7 @@ import GPUtil
 import requests
 import json
 
-#Send data to flask server using requests module
+# Send data to flask server using requests module
 def convert_bytes(bytes):
     factor = 1024
     listValues = ["B", "KB", "MB", "GB", "TB", "PB"]
@@ -80,8 +80,8 @@ start_data = {
         }
     ]
 }
-
-requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(start_data))
+data_url = f"http://localhost:3000/api/computers/{node}/getData"
+requests.post(data_url, json = json.dumps(start_data))
 
 # realtime data
 while True:
@@ -167,7 +167,7 @@ while True:
             }
         ]
     }
-    requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(realtime_data))
-    requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(list_disks))
-    requests.post(f"http://ip.address:port/api/computers/{node}/getData", json = json.dumps(list_gpu))
+    requests.post(data_url, json = json.dumps(realtime_data))
+    requests.post(data_url, json = json.dumps(list_disks))
+    requests.post(data_url, json = json.dumps(list_gpu))
     time.sleep(5)
