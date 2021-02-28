@@ -3,12 +3,6 @@ flask
 psutil
 requests
 mss
-platform
-json
-subprocess
-threading
-zlib
-random
 pygame
 pyautogui
 pynput
