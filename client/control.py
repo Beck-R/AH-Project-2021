@@ -3,7 +3,7 @@ from threading import Thread
 from zlib import compress
 import platform
 from mss import mss
-import name
+import getclicks
 
 WIDTH, HEIGHT = name.pgi.size()
 
