@@ -5,7 +5,7 @@ import pygame, time
 import requests
 import threading
 #from pynput.mouse import Listener
-import pynput
+import pynput, sys
 
 data = ''
 WIDTH = 1920
@@ -112,7 +112,25 @@ def main(host, port):
 
 
 if __name__ == '__main__':
-    r = requests.get('http://192.168.1.100:8080/api/computers/listOfConnectedDevices').json()
+    if sys.platform == "linux" or sys.platform == "linux2":
+        output = str(subprocess.check_output('iwgetid')).split(' ')
+        val = output[len(output)-1].replace('ESSID:','').replace('"', '')
+        ssid = val[:-3]
+    elif sys.platform == 'darwin':
+        process = subprocess.Popen(['/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport','-I'], stdout=subprocess.PIPE)
+        out, err = process.communicate()
+        process.wait()
+        out = out.splitlines()
+        ssid = out[12].split(" ")[1]
+    elif sys.platform == 'win32':
+        data = subprocess.check_output("netsh wlan show interfaces")
+        data = str(data)
+        data = data.split('\ r\ n'.replace(' ', ''))
+        ssid = ''
+        for x in range(len(data)):
+            if ' SSID' in data[x]:
+                ssid = data[x].replace(' ', '').replace('SSID:', '')
+    r = requests.get('http://192.168.1.100:8080/api/computers/{ssid}/listOfConnectedDevices').json()
     lDevices = r['list']
     dDevices = {}
     for i in range(len(lDevices)):
