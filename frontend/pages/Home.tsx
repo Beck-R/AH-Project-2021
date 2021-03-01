@@ -56,8 +56,8 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const computers: any = await fetcher(
-        `http://localhost:8080/api/computers/all/sendData`
-    ) || {}
+        `http://openaccess.space:8080/api/computers/all/sendData`
+    )
     console.log(typeof computers)
     var machines = []
     var avgProcUsage = 0
@@ -65,10 +65,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     for (const machine in computers) {
         machines.push(computers[machine])
         console.dir(computers[machine])
-        avgProcUsage += computers[machine].computer.cpu.cpu_usage
+        avgProcUsage += computers[machine].computer.cpu.cpu_usage/100
         avgMemUsage += parseInt(
             computers[machine].computer.memory.percent_mem.split("%")[0]
-        )
+        )/100
     }
 
     avgProcUsage /= machines.length

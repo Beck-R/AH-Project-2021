@@ -41,7 +41,7 @@ def getData(id):
             if id not in dictData:
                 dictData[id] = {}
             dictData[id][key] = data[key]
-            return f"Success! Added key {key} to data for node {id}!"
+            return f"Success! Added key {key} to data for node {id}! Data: {dictData}"
         return f"Received request, but something might have gone wrong! Please make sure the body is formatted as JSON."
     except Exception as e:
         return formatErr(e)
@@ -147,4 +147,4 @@ def listOfConnectedDevices(ssid):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=8080, threaded=True)
+    app.run(host='0.0.0.0',port=8080, threaded=False)
