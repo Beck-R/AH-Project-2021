@@ -1,18 +1,29 @@
 import {DefaultPage} from "../../components/DefaultPage"
 import {GetServerSideProps} from "next"
 import { useRouter } from 'next/router'
-
+import {Collapse} from 'antd'
+const { Panel } = Collapse;
 export default function Machine(props) {
     const {computers} = props
     const router = useRouter()
     const { machine } = router.query
-    const computer = computers[machine[0]] || ""
+    console.log(machine)
+    var computer = computers[0]
+    for (var m in computers) {
+        m = computers[m]
+        if (m.init.sys_name == machine) {
+            computer = m
+        }
+    }
     return (
         <DefaultPage title="Machine Info">
-            <h1>{computer.init}</h1>
+            <h1>{computer.init.sys_name}</h1>
             
-            <h6>Raw API Response</h6>
-            <code>{JSON.stringify(computer)}</code>
+            <Collapse>
+                <Panel header="Raw API Response" key="1">
+                    <code>{JSON.stringify(computer)}</code>
+                </Panel>
+            </Collapse>
         </DefaultPage>
     )
 }
