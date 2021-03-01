@@ -130,7 +130,7 @@ if __name__ == '__main__':
         for x in range(len(data)):
             if ' SSID' in data[x]:
                 ssid = data[x].replace(' ', '').replace('SSID:', '')
-    r = requests.get('http://openaccess.space:8080/api/computers/{ssid}/listOfConnectedDevices').json()
+    r = requests.get(f'http://openaccess.space:8080/api/computers/{ssid}/listOfConnectedDevices').json()
     lDevices = r['list']
     dDevices = {}
     for i in range(len(lDevices)):
