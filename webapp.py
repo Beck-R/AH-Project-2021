@@ -135,7 +135,7 @@ def getIpPort(id):
         print('e')
         return jsonify({'ip': 'not_found', 'port': 'not found'})
 
-@app.route('/api/computers/<ssid>/listOfConnectedDevices', methods=['POST'])
+@app.route('/api/computers/<ssid>/listOfConnectedDevices', methods=['GET'])
 def listOfConnectedDevices(ssid):
     data = request.json
     sendList = []
