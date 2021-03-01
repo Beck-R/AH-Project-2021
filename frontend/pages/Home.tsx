@@ -71,8 +71,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         )
     }
 
-    avgProcUsage /= machines.length / 100
-    avgMemUsage /= machines.length / 100
+    avgProcUsage /= machines.length
+    avgMemUsage /= machines.length
 
     console.dir("********", computers)
     return {

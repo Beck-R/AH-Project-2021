@@ -31,7 +31,7 @@ export interface IComputer {
         }
     ]
 
-    gpus: [
+    gpus?: [
         {
             gpu_id: number
             gpu_name: string
