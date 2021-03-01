@@ -78,7 +78,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             computers: machines,
-            procUsage: avgProcUsage,
+            procUsage: avgProcUsage.toFixed(3),
             memUsage: avgMemUsage
         }
     }
