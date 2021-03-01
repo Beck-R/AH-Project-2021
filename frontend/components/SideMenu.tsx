@@ -1,5 +1,5 @@
-import {Menu,Typography} from "antd"
-import Link from 'next/link'
+import {Menu, Typography} from "antd"
+import Link from "next/link"
 import {
     AppstoreOutlined,
     MenuUnfoldOutlined,
@@ -12,7 +12,7 @@ import {
     RadarChartOutlined
 } from "@ant-design/icons"
 
-const {Title, Text } = Typography
+const {Title, Text} = Typography
 
 export interface IMenuProps {}
 
@@ -26,21 +26,20 @@ export function SideMenu(props: IMenuProps): JSX.Element {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    flexDirection:"column",
+                    flexDirection: "column",
                     height: "8vh",
-                    padding:"none",
-                    color:"whitesmoke"
-                    
+                    padding: "none",
+                    color: "whitesmoke"
                 }}>
-                <RadarChartOutlined style={{fontSize: "2em"}}/>
+                <RadarChartOutlined style={{fontSize: "2em"}} />
             </div>
             <Menu theme="dark" style={{position: "sticky", height: "100vh"}}>
-                <a href="/Home"><Menu.Item key="1" icon={<ContainerOutlined />}>
+                <Menu.Item key="1" icon={<ContainerOutlined />}>
                     Home
-                </Menu.Item></a>
-                <a href="/About"><Menu.Item key="2" icon={<QuestionOutlined />}>
+                </Menu.Item>
+                <Menu.Item key="2" icon={<QuestionOutlined />}>
                     About
-                </Menu.Item></a>
+                </Menu.Item>
             </Menu>
         </>
     )
