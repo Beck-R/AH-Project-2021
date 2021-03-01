@@ -13,7 +13,7 @@ elif sys.platform == 'darwin':
         out, err = process.communicate()
         process.wait()
         out = out.splitlines()
-        ssid = out[12].split(" ")[1]
+        ssid = str(out[12].split()[1])
 elif sys.platform == 'win32':
         data = subprocess.check_output("netsh wlan show interfaces")
         data = str(data)
