@@ -185,5 +185,3 @@ def sys_monitor():
         requests.post(data_url, json = disk_data)
         requests.post(data_url, json = gpu_data)
         time.sleep(5)
-
-sys_monitor()
