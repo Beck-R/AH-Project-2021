@@ -35,12 +35,12 @@ export function SideMenu(props: IMenuProps): JSX.Element {
                 <RadarChartOutlined style={{fontSize: "2em"}}/>
             </div>
             <Menu theme="dark" style={{position: "sticky", height: "100vh"}}>
-                <Link href="/Home"><Menu.Item key="1" icon={<ContainerOutlined />}>
+                <a href="/Home"><Menu.Item key="1" icon={<ContainerOutlined />}>
                     Home
-                </Menu.Item></Link>
-                <Link href="/About"><Menu.Item key="1" icon={<QuestionOutlined />}>
+                </Menu.Item></a>
+                <a href="/About"><Menu.Item key="2" icon={<QuestionOutlined />}>
                     About
-                </Menu.Item></Link>
+                </Menu.Item></a>
             </Menu>
         </>
     )
