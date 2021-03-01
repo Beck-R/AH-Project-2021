@@ -181,7 +181,8 @@ def sys_monitor():
                 }
             
         }
-        requests.post(data_url, realtime_data)
+        requests.post(data_url, json=realtime_data)
+        print(r.text())
         requests.post(data_url, json = disk_data)
         requests.post(data_url, json = gpu_data)
         time.sleep(5)
