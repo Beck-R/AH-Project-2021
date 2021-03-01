@@ -1,14 +1,14 @@
 import {DefaultPage} from "../../components/DefaultPage"
 import {GetServerSideProps} from "next"
 import { useRouter } from 'next/router'
-import {Collapse} from 'antd'
+import {Collapse, Result} from 'antd'
 const { Panel } = Collapse;
 export default function Machine(props) {
     const {computers} = props
     const router = useRouter()
     const { machine } = router.query
     console.log(machine)
-    var computer = computers[0]
+    var computer;
     for (var m in computers) {
         m = computers[m]
         if (m.init.sys_name == machine) {
@@ -17,13 +17,17 @@ export default function Machine(props) {
     }
     return (
         <DefaultPage title="Machine Info">
-            <h1>{computer.init.sys_name}</h1>
+            {computer ? <><h1>{computer.init.sys_name}</h1>
             
             <Collapse>
                 <Panel header="Raw API Response" key="1">
                     <code>{JSON.stringify(computer)}</code>
                 </Panel>
-            </Collapse>
+            </Collapse></> : <Result
+    status="500"
+    title="Error"
+    subTitle="It appears there is no data for this machine. Please verify that the machine is connected to the server."
+  /> }
         </DefaultPage>
     )
 }
