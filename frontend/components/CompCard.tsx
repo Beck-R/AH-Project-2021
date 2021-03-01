@@ -11,7 +11,7 @@ export interface ICompCard {
 export function CompCard(props: ICompCard) {
     const { computer } = props
     return (
-        <Card style={{ width: 300, padding:"1em" }} title={computer.init.sys_name} extra={<Link href={"/machines/"+computer.init.sys_name}>More</Link>}>
+        <Card style={{ width: 300, margin:"1em" }} title={computer.init.sys_name} extra={<Link href={"/machines/"+computer.init.sys_name}>More</Link>}>
         <p><b>System Vitals</b></p>
         <p>OS: {computer.init.os} {computer.init.os_release}</p>
         
