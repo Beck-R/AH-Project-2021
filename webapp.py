@@ -33,7 +33,7 @@ def getClicks(id):
 def getData(id):
     try:
         data = request.json
-        data = json.loads(data)
+        # data = json.loads(data)
         if data != None:
             data.pop("version")
             key = list(data.keys())[0]
