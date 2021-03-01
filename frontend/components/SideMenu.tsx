@@ -1,4 +1,5 @@
 import {Menu,Typography} from "antd"
+import Link from 'next/link'
 import {
     AppstoreOutlined,
     MenuUnfoldOutlined,
@@ -34,12 +35,12 @@ export function SideMenu(props: IMenuProps): JSX.Element {
                 <RadarChartOutlined style={{fontSize: "2em"}}/>
             </div>
             <Menu theme="dark" style={{position: "sticky", height: "100vh"}}>
-                <Menu.Item key="1" icon={<ContainerOutlined />}>
+                <Link href="/Home"><Menu.Item key="1" icon={<ContainerOutlined />}>
                     Home
-                </Menu.Item>
-                <Menu.Item key="1" icon={<QuestionOutlined />}>
+                </Menu.Item></Link>
+                <Link href="/About"><Menu.Item key="1" icon={<QuestionOutlined />}>
                     About
-                </Menu.Item>
+                </Menu.Item></Link>
             </Menu>
         </>
     )
