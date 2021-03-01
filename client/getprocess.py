@@ -17,5 +17,5 @@ def proc_monitor():
                 #time.sleep(0.1)
                 data[p.name()] = [p.cpu_percent(interval=1), p.memory_percent(), int(line.decode().rstrip())]
 
-        r = requests.post(f'http://openaccess.space:8080/api/computers/{node}/getProcesses', json=json.dumps(data))
+        r = requests.post(f'http://openaccess.space:8080/api/computers/{node}/getProcesses', json=(data))
         time.sleep(10)

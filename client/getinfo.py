@@ -92,7 +92,7 @@ def sys_monitor():
     base_url = "http://openaccess.space:8080"
     data_url = f"{base_url}/api/computers/{node}/getData"
 
-    requests.post(data_url, json = json.dumps(start_data))
+    requests.post(data_url, json = start_data)
 
     # realtime data
     while True:
@@ -181,9 +181,8 @@ def sys_monitor():
                 }
             
         }
-        requests.post(data_url, json = json.dumps(realtime_data))
-        requests.post(data_url, json = json.dumps(disk_data))
-        requests.post(data_url, json = json.dumps(gpu_data))
+        requests.post(data_url, json=realtime_data)
+        print(r.text())
+        requests.post(data_url, json = disk_data)
+        requests.post(data_url, json = gpu_data)
         time.sleep(5)
-
-sys_monitor()

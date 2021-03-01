@@ -137,7 +137,6 @@ def getIpPort(id):
 
 @app.route('/api/computers/<ssid>/listOfConnectedDevices', methods=['GET'])
 def listOfConnectedDevices(ssid):
-    data = request.json
     sendList = []
     for key in ip_ports:
         d = ip_ports[key]
